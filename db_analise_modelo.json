@@ -1,0 +1,29 @@
+{
+  "analiseModelo": [
+    {
+      "id": 1,
+      "descricao": "Desenvolvedor Junior",
+      "prompt": "Analise a transcrição desta entrevista e determine se o candidato é apto para a vaga de Desenvolvedor Junior. Considere: conhecimento básico em JavaScript/Node.js, lógica de programação, capacidade de aprendizado e comunicação. Retorne 'APT' ou 'NAO_APT' com uma breve justificativa."
+    },
+    {
+      "id": 2,
+      "descricao": "Desenvolvedor Pleno",
+      "prompt": "Analise a transcrição da entrevista para a vaga de Desenvolvedor Pleno. Verifique: experiência comprovada com Angular/React, capacidade de resolver problemas complexos, trabalho em equipe. Retorne 'APT' ou 'NAO_APT' com uma análise sucinta."
+    },
+    {
+      "id": 3,
+      "descricao": "Desenvolvedor Sênior",
+      "prompt": "Analise criteriosamente a transcrição da entrevista para a vaga de Desenvolvedor Sênior. Verifique: conhecimento avançado em arquitetura de software e design patterns, capacidade de liderar equipes e projetos. Retorne 'APT' ou 'NAO_APT' com uma análise detalhada."
+    },
+    {
+      "id": 4,
+      "descricao": "Analista de QA",
+      "prompt": "Valide a entrevista para a vaga de Analista de QA. Verifique: experiência em testes de software, conhecimento de ferramentas de automação e metodologias ágeis. Retorne 'APT' ou 'NAO_APT' com uma análise sucinta."
+    },
+    {
+      "id": 5,
+      "descricao": "Product Owner",
+      "prompt": "Analise esta transcrição para a vaga de Product Owner. Verifique: experiência em gestão de produtos, capacidade de priorizar demandas e comunicação com stakeholders. Retorne 'APT' ou 'NAO_APT' com uma análise detalhada."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+<div class="form-container">
+  <h2 class="form-title">Validação de Candidato</h2>
+
+  <form [formGroup]="form">
+    <!-- Upload de arquivo -->
+    <div class="form-group">
+      <input #fileInput type="file" accept=".txt" hidden (change)="onFileSelected($event)">
+      <button class="file-upload-button" (click)="triggerFileInput()">
+        <span class="file-icon">📁</span> Incluir Transcrição
+      </button>
+
+      <div *ngIf="conteudoArquivo" class="file-upload-success">
+        Arquivo carregado com sucesso! ({{conteudoArquivo.length}} caracteres)
+      </div>
+    </div>
+
+    <!-- Perfil da vaga -->
+    <div class="form-group">
+      <label>Selecionar o Perfil da Vaga:</label>
+      <select formControlName="perfilVaga" class="form-control">
+        <option value="" disabled selected>Selecione um perfil</option>
+        <option *ngFor="let perfil of vagaPerfis" [value]="perfil.descricao">
+          {{ perfil.descricao }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Salário pedido -->
+    <div class="form-group">
+      <label>Incluir Salário Pedido:</label>
+      <input 
+        type="text" 
+        formControlName="salarioPedido" 
+        class="form-control" 
+        placeholder="Digite o salário pedido"
+        mask="separator.2" 
+        thousandSeparator="." 
+        decimalMarker=",">
+    </div>
+
+    <!-- Modelo de Análise -->
+    <div class="form-group">
+      <label>Modelo da Análise e Resultado:</label>
+      <select formControlName="modeloAnalise" class="form-control">
+        <option value="" disabled selected>Selecione um modelo</option>
+        <option *ngFor="let modelo of analiseModelos" [value]="modelo.descricao">
+          {{ modelo.descricao }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Botão para enviar análise -->
+    <div class="form-actions">
+      <button 
+        class="submit-button" 
+        [disabled]="!formValido"
+        (click)="enviarAnalise()">
+        Enviar para análise
+      </button>
+    </div>
+  </form>
+</div>

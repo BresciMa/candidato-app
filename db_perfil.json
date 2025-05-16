@@ -1,0 +1,29 @@
+{
+  "vagaPerfis": [
+    {
+      "id": 1,
+      "descricao": "Desenvolvedor Júnior",
+      "requisito": "Experiência com programação básica em JavaScript e Node.js."
+    },
+    {
+      "id": 2,
+      "descricao": "Desenvolvedor Pleno",
+      "requisito": "Experiência com frameworks como Angular e React."
+    },
+    {
+      "id": 3,
+      "descricao": "Desenvolvedor Sênior",
+      "requisito": "Conhecimento avançado em arquitetura de software e design patterns."
+    },
+    {
+      "id": 4,
+      "descricao": "Analista de Sistemas",
+      "requisito": "Experiência em análise de requisitos e documentação de sistemas."
+    },
+    {
+      "id": 5,
+      "descricao": "Gerente de Projetos",
+      "requisito": "Experiência com gestão de equipes e metodologias ágeis."
+    }
+  ]
+}

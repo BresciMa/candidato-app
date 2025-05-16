@@ -1,0 +1,97 @@
+.form-container {
+  width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.form-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #4285f4;
+}
+
+.file-upload-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #f8f9fa;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.file-upload-button:hover {
+  background-color: #e9ecef;
+  border-color: #999;
+}
+
+.file-icon {
+  margin-right: 0.5rem;
+}
+
+.file-upload-success {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: #e6f7ee;
+  color: #2e7d32;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #3367d6;
+}
+
+.submit-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Melhorias para acessibilidade */
+select:focus, 
+input:focus, 
+button:focus {
+  outline: 2px solid #4285f4;
+  outline-offset: 2px;
+}
