@@ -1,0 +1,26 @@
+<div class="login-container">
+  <h2 class="login-title">Login</h2>
+
+  <form>
+    <div class="form-group">
+      <label for="usuario">Usuário:</label>
+      <input id="usuario" type="text" [(ngModel)]="usuario" name="usuario">
+    </div>
+
+    <div class="form-group">
+      <label for="senha">Senha:</label>
+      <input id="senha" type="password" [(ngModel)]="senha" name="senha">
+    </div>
+
+    <div class="form-group">
+      <button 
+        type="button" 
+        class="login-button" 
+        [class.enabled]="usuario && senha" 
+        [disabled]="!usuario || !senha"
+        (click)="login()">
+        Entrar
+      </button>
+    </div>
+  </form>
+</div>
