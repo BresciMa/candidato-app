@@ -18,7 +18,7 @@ export class LoginComponent {
 
   login() {
     if (this.usuario === 'admin' && this.senha === 'admin') {
-      this.router.navigate(['/app']);
+      this.router.navigate(['/home']);
     } else {
       alert('Usuário ou senha inválidos!');
     }

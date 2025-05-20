@@ -1,0 +1,25 @@
+<h2>Perfis de Vaga</h2>
+
+<form (submit)="adicionarPerfil(); $event.preventDefault();">
+  <input type="text" [(ngModel)]="novoPerfil.Descricao" name="descricao" placeholder="Descrição" required>
+  <input type="text" [(ngModel)]="novoPerfil.Requisitos" name="requisitos" placeholder="Requisitos" required>
+  <button type="submit">Adicionar</button>
+</form>
+<p></p>
+<p></p>
+<table>
+  <tr>
+    <th>Descrição</th>
+    <th>Requisitos</th>
+    <th>Ações</th>
+  </tr>
+  <tr *ngFor="let perfil of perfis; let i = index">
+    <td><input [(ngModel)]="perfil.Descricao" name="desc{{i}}"></td>
+    <td><input [(ngModel)]="perfil.Requisitos" name="req{{i}}"></td>
+    <td>
+      <button (click)="removerPerfil(i)">Remover</button>
+    </td>
+  </tr>
+</table>
+
+<button (click)="salvar()">Salvar Tudo</button>
