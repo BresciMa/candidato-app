@@ -139,7 +139,7 @@ export class AppComponent {
     this.form.get('salarioPedido')?.setValue(valorFormatado, { emitEvent: false });
   }
 
-  /** Envia análise com todos os dados do formulário e arquivo */
+    /** Envia análise com todos os dados do formulário e arquivo */
   enviarAnalise(): void {
     if (!this.form.valid || !this.conteudoArquivo) {
       console.warn('Formulário inválido ou arquivo não carregado');
@@ -173,7 +173,15 @@ export class AppComponent {
       faixaSalarialEsperada
     };
 
-    console.log('Dados para análise:', dadosAnalise);
+    // Envia os dados como JSON
+    this.http.post('/api/analise.php', dadosAnalise, { responseType: 'text' }).subscribe({
+    next: response => {
+      console.log('Resposta do servidor:', response);
+      },
+      error: error => {
+        console.error('Erro ao enviar análise:', error);
+      }
+    });
   }
 
   /** Detecta tipo do perfil (Junior, Pleno, Senior) */
