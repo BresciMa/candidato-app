@@ -1,0 +1,32 @@
+<div class="container">
+  <h2 class="titulo">Modelo de Validação</h2>
+
+  <div class="card">
+    <div class="formulario">
+      <input type="text" placeholder="Descrição" [(ngModel)]="novaDescricao" />
+      <input type="text" placeholder="Prompt" [(ngModel)]="novosPrompts" />
+      <button class="btn-adicionar" (click)="adicionarModelo()">➕ Incluir Modelo</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Prompt</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mod of modelo; let i = index">
+          <td><input [(ngModel)]="mod.Descricao" /></td>
+          <td><input [(ngModel)]="mod.Prompt" /></td>
+          <td><button (click)="removerModelo(i)">🗑️ Remover</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="botoes">
+      <button class="btn-salvar" (click)="salvar()">💾 Salvar Tudo</button>
+    </div>
+  </div>
+</div>
