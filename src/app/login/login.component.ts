@@ -1,26 +1,31 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  usuario = '';
-  senha = '';
+  usuario: string = '';
+  senha: string = '';
+  loginInvalido: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    if (this.usuario === 'admin' && this.senha === 'admin') {
+    const sucesso = this.authService.login(this.usuario, this.senha);
+
+    if (sucesso) {
+      this.loginInvalido = false;
       this.router.navigate(['/home']);
     } else {
-      alert('Usuário ou senha inválidos!');
+      this.loginInvalido = true;
     }
   }
 }

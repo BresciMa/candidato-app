@@ -177,7 +177,8 @@ export class DashboardComponent {
   // Adiciona o arquivo do formulário (do campo transcricaoArquivo)
   const arquivo = this.form.get('transcricaoArquivo')?.value;
   if (arquivo) {
-    formData.append('arquivo', arquivo, arquivo.name);
+    formData.append('cvFile', arquivo, arquivo.name);
+    formData.append('transcricaoentrevista', arquivo, arquivo.name);
   } else {
     alert('Selecione um arquivo válido');
     return;
