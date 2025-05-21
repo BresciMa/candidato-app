@@ -1,69 +1,86 @@
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
 }
 
-h1 {
-    color: #333;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
+.titulo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #1f2937;
 }
 
-.form-section {
-    margin-bottom: 15px;
+.card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
 }
 
-.form-section label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+.formulario {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.form-section select, 
-.form-section input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.formulario input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
 }
 
-.profiles-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+.btn-adicionar {
+  padding: 0.5rem 1rem;
+  background-color: #facc15;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
 
-.profiles-table th, 
-.profiles-table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
 }
 
-.profiles-table th {
-    background-color: #f5f5f5;
+th,
+td {
+  padding: 0.5rem;
+  text-align: left;
+}
+
+td input {
+  width: 100%;
+  padding: 0.3rem;
+  border-radius: 0.3rem;
+  border: 1px solid #ccc;
+}
+
+th {
+  color: #374151;
+  font-weight: 600;
 }
 
 button {
-    padding: 8px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
 }
 
-.submit-button, 
-.save-button {
-    background-color: #4CAF50;
-    color: white;
+.botoes {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.remove-button {
-    background-color: #f44336;
-    color: white;
-}
-
-button:hover {
-    opacity: 0.8;
+.btn-salvar {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 }

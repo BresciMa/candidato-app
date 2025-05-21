@@ -14,6 +14,8 @@ export class PerfilVagaComponent implements OnInit {
   perfis: PerfilVaga[] = [];
   novoPerfil: PerfilVaga = { Descricao: '', Requisitos: '' };
   editandoPerfil: PerfilVaga | null = null;
+  novaDescricao: string = '';
+  novosRequisitos: string = '';
 
   constructor(private perfilService: PerfilVagaService) {}
 

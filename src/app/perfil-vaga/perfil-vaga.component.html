@@ -1,25 +1,32 @@
-<h2>Perfis de Vaga</h2>
+<div class="container">
+  <h2 class="titulo">Perfis de Vaga</h2>
 
-<form (submit)="adicionarPerfil(); $event.preventDefault();">
-  <input type="text" [(ngModel)]="novoPerfil.Descricao" name="descricao" placeholder="Descrição" required>
-  <input type="text" [(ngModel)]="novoPerfil.Requisitos" name="requisitos" placeholder="Requisitos" required>
-  <button type="submit">Adicionar</button>
-</form>
-<p></p>
-<p></p>
-<table>
-  <tr>
-    <th>Descrição</th>
-    <th>Requisitos</th>
-    <th>Ações</th>
-  </tr>
-  <tr *ngFor="let perfil of perfis; let i = index">
-    <td><input [(ngModel)]="perfil.Descricao" name="desc{{i}}"></td>
-    <td><input [(ngModel)]="perfil.Requisitos" name="req{{i}}"></td>
-    <td>
-      <button (click)="removerPerfil(i)">Remover</button>
-    </td>
-  </tr>
-</table>
+  <div class="card">
+    <div class="formulario">
+      <input type="text" placeholder="Descrição" [(ngModel)]="novaDescricao" />
+      <input type="text" placeholder="Requisitos" [(ngModel)]="novosRequisitos" />
+      <button class="btn-adicionar" (click)="adicionarPerfil()">➕ Incluir Perfil</button>
+    </div>
 
-<button (click)="salvar()">Salvar Tudo</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>Requisitos</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let perfil of perfis; let i = index">
+          <td><input [(ngModel)]="perfil.Descricao" /></td>
+          <td><input [(ngModel)]="perfil.Requisitos" /></td>
+          <td><button (click)="removerPerfil(i)">🗑️ Remover</button></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="botoes">
+      <button class="btn-salvar" (click)="salvar()">💾 Salvar Tudo</button>
+    </div>
+  </div>
+</div>
