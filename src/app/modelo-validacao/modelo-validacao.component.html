@@ -3,6 +3,7 @@
 
   <div class="card">
     <div class="formulario">
+      <input type="text" placeholder="IdModelo" [(ngModel)]="novoIdModelo" />
       <input type="text" placeholder="Descrição" [(ngModel)]="novaDescricao" />
       <input type="text" placeholder="Prompt" [(ngModel)]="novosPrompts" />
       <button class="btn-adicionar" (click)="adicionarModelo()">➕ Incluir Modelo</button>
@@ -11,6 +12,7 @@
     <table>
       <thead>
         <tr>
+          <th>IdModelo</th>
           <th>Descrição</th>
           <th>Prompt</th>
           <th>Ações</th>
@@ -18,6 +20,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let mod of modelo; let i = index">
+          <td><input [(ngModel)]="mod.idModelo"></td>
           <td><input [(ngModel)]="mod.Descricao" /></td>
           <td><input [(ngModel)]="mod.Prompt" /></td>
           <td><button (click)="removerModelo(i)">🗑️ Remover</button></td>

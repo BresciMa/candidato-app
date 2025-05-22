@@ -1,5 +1,5 @@
 export interface Modelo {
-  id: number;
+  idModelo: string;
   descricao: string;
   prompt: string;
 }

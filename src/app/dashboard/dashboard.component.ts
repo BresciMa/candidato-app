@@ -24,6 +24,7 @@ interface VagaPerfil {
 }
 
 interface ModeloAnalise {
+  idModelo: string;
   descricao: string;
   prompt: string;
 }
@@ -35,29 +36,27 @@ interface ModeloAnalise {
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
   form: FormGroup;
   conteudoArquivo = '';
-  vagaPerfis: any[] = [];
-  analiseModelos: any[] = [];
+  vagaPerfis: VagaPerfil[] = [];
+  analiseModelos: ModeloAnalise[] = [];
   padronizacoes: Padronizacoes = { TempoExperiencia: [], FaixaSalarial: [] };
 
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.form = this.fb.group({
       perfilVaga: ['', Validators.required],
       salarioPedido: ['', Validators.required],
-      modeloAnalise: ['', Validators.required],
+      modeloAnalise: [null, Validators.required], // <-- Agora armazena o objeto inteiro
       transcricaoArquivo: [null, Validators.required]
     });
   }
 
- ngOnInit(): void {
+  ngOnInit(): void {
     this.loadPerfisEPadronizacoes();
     this.loadModelosAnalise();
   }
 
-  /** Carrega perfis e padronizações da API */
   private loadPerfisEPadronizacoes(): void {
     this.http.get<any>('/api/whatsapp/candidatos/backend.php').subscribe({
       next: data => {
@@ -71,7 +70,6 @@ export class DashboardComponent {
     });
   }
 
-  /** Carrega modelos de análise da API */
   private loadModelosAnalise(): void {
     this.http.get<any>('/api/whatsapp/candidatos/backend.php').subscribe({
       next: data => {
@@ -81,7 +79,6 @@ export class DashboardComponent {
     });
   }
 
-  /** Mapeia dados da API para objetos do tipo VagaPerfil */
   private mapVagaPerfis(rawPerfis: any[]): VagaPerfil[] {
     return rawPerfis.map(perfil => ({
       descricao: perfil.Descricao,
@@ -89,13 +86,14 @@ export class DashboardComponent {
     }));
   }
 
-  /** Mapeia dados da API para objetos do tipo ModeloAnalise */
   private mapModelosAnalise(rawModelos: any[]): ModeloAnalise[] {
     return rawModelos.map(modelo => ({
+      idModelo: modelo.IdModelo, // <-- Ajuste aqui: deve bater com o backend
       descricao: modelo.Descricao,
       prompt: modelo.Prompt
     }));
   }
+
   get formValido() {
     return this.form.valid;
   }
@@ -120,7 +118,6 @@ export class DashboardComponent {
     }
   }
 
-  /** Detecta tipo do perfil (Junior, Pleno, Senior) */
   private detectarTipoPerfil(descricao: string): string {
     const desc = descricao.toLowerCase();
     if (desc.includes('jr')) return 'Junior';
@@ -128,8 +125,7 @@ export class DashboardComponent {
     if (desc.includes('sr')) return 'Senior';
     return '';
   }
-  
-  /** Busca experiência esperada pela padronização */
+
   private buscarExperienciaEsperada(tipoPerfil: string): string {
     if (!tipoPerfil) return 'Não encontrado';
     return this.padronizacoes.TempoExperiencia.find(
@@ -137,68 +133,66 @@ export class DashboardComponent {
     )?.Experiencia ?? 'Não encontrado';
   }
 
-  /** Busca faixa salarial esperada pela padronização */
   private buscarFaixaSalarialEsperada(tipoPerfil: string): string {
     if (!tipoPerfil) return 'Não encontrado';
     return this.padronizacoes.FaixaSalarial.find(
       f => f.Perfil.toLowerCase() === tipoPerfil.toLowerCase()
     )?.Salario ?? 'Não encontrado';
   }
+
   enviarAnalise() {
-  if (!this.form.valid) {
-    alert('Preencha todos os campos e selecione um arquivo válido.');
-    return;
-  } 
-
-  const formData = new FormData();
-
-
-  const perfilDescricao = this.form.value.perfilVaga;
-  const modeloDescricao = this.form.value.modeloAnalise;
-  const salarioPedido = this.form.value.salarioPedido;
-
-  const perfilSelecionado = this.vagaPerfis.find(p => p.descricao === perfilDescricao);
-  const modeloSelecionado = this.analiseModelos.find(m => m.descricao === modeloDescricao);
-
-  const tipoPerfil = this.detectarTipoPerfil(perfilDescricao);
-
-  const experienciaEsperada = this.buscarExperienciaEsperada(tipoPerfil);
-  const faixaSalarialEsperada = this.buscarFaixaSalarialEsperada(tipoPerfil);
-
-  formData.append('perfilDescricao',perfilDescricao);
-  formData.append('modeloDescricao', modeloDescricao);
-  formData.append('salarioPedido', salarioPedido);
-  formData.append('requisitoPerfil', perfilSelecionado.requisito);
-  formData.append('promptModelo', modeloSelecionado.prompt);
-  formData.append('tipoPerfil', tipoPerfil);
-  formData.append('experienciaEsperada', experienciaEsperada);
-  formData.append('faixaSalarialEsperada', faixaSalarialEsperada);
-
-  // Adiciona o arquivo do formulário (do campo transcricaoArquivo)
-  const arquivo = this.form.get('transcricaoArquivo')?.value;
-  if (arquivo) {
-    formData.append('cvFile', arquivo, arquivo.name);
-    formData.append('transcricaoentrevista', arquivo, arquivo.name);
-  } else {
-    alert('Selecione um arquivo válido');
-    return;
-  }
-
-  // Log do que está sendo enviado
-  for (const [key, value] of (formData as any).entries()) {
-    console.log(`${key}:`, value);
-  }
-
-  this.http.post('/api/whatsapp/candidatos/analise.php', formData, { responseType: 'text' })
-  .subscribe({
-    next: (res) => {
-      console.log('Resposta recebida:', res);
-      alert('Análise enviada com sucesso!');
-    },
-    error: (err) => {
-      console.error('Erro ao enviar análise:', err);
-      alert(`Erro ao enviar análise: ${err.status} - ${err.statusText}\n${err.message}`);
+    if (!this.form.valid) {
+      alert('Preencha todos os campos e selecione um arquivo válido.');
+      return;
     }
-  });
+
+    const formData = new FormData();
+
+    const perfilDescricao = this.form.value.perfilVaga;
+    const perfilSelecionado = this.vagaPerfis.find(p => p.descricao === perfilDescricao);
+    const tipoPerfil = this.detectarTipoPerfil(perfilDescricao);
+
+    const modeloSelecionado: ModeloAnalise = this.form.value.modeloAnalise;
+
+    const salarioPedido = this.form.value.salarioPedido;
+    const experienciaEsperada = this.buscarExperienciaEsperada(tipoPerfil);
+    const faixaSalarialEsperada = this.buscarFaixaSalarialEsperada(tipoPerfil);
+
+    formData.append('perfilDescricao', perfilDescricao);
+    formData.append('tipoPerfil', tipoPerfil);
+    formData.append('requisitoPerfil', perfilSelecionado?.requisito ?? '');
+
+    formData.append('modeloDescricao', modeloSelecionado.descricao);
+    formData.append('promptModelo', modeloSelecionado.prompt);
+    formData.append('idModelo', modeloSelecionado.idModelo);
+
+    formData.append('salarioPedido', salarioPedido);
+    formData.append('experienciaEsperada', experienciaEsperada);
+    formData.append('faixaSalarialEsperada', faixaSalarialEsperada);
+
+    const arquivo = this.form.get('transcricaoArquivo')?.value;
+    if (arquivo) {
+      formData.append('cvFile', arquivo, arquivo.name);
+      formData.append('transcricaoentrevista', arquivo, arquivo.name);
+    } else {
+      alert('Selecione um arquivo válido');
+      return;
+    }
+
+    for (const [key, value] of (formData as any).entries()) {
+      console.log(`${key}:`, value);
+    }
+
+    this.http.post('/api/whatsapp/candidatos/analise.php', formData, { responseType: 'text' })
+      .subscribe({
+        next: (res) => {
+          console.log('Resposta recebida:', res);
+          alert('Análise enviada com sucesso!');
+        },
+        error: (err) => {
+          console.error('Erro ao enviar análise:', err);
+          alert(`Erro ao enviar análise: ${err.status} - ${err.statusText}\n${err.message}`);
+        }
+      });
   }
 }

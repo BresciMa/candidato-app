@@ -2,7 +2,7 @@
   <h2 class="form-title">Validação de Candidato</h2>
 
   <form [formGroup]="form">
-    <!-- Upload de arquivo -->
+    <!-- Upload -->
     <div class="form-group">
       <label class="file-upload-label">
         <input #fileInput type="file" accept=".txt" hidden (change)="onFileSelected($event)">
@@ -15,18 +15,18 @@
       </div>
     </div>
 
-    <!-- Perfil da vaga -->
+    <!-- Perfil -->
     <div class="form-group">
       <label for="perfilVaga">Selecionar o Perfil da Vaga:</label>
       <select id="perfilVaga" formControlName="perfilVaga" class="form-control">
-        <option value="" disabled selected>Selecione um perfil</option>
+        <option value="" disabled>Selecione um perfil</option>
         <option *ngFor="let perfil of vagaPerfis" [value]="perfil.descricao">
           {{ perfil.descricao }}
         </option>
       </select>
     </div>
 
-    <!-- Salário pedido -->
+    <!-- Salário -->
     <div class="form-group">
       <label for="salarioPedido">Incluir Salário Pedido:</label>
       <input 
@@ -41,14 +41,14 @@
     <div class="form-group">
       <label for="modeloAnalise">Modelo da Análise e Resultado:</label>
       <select id="modeloAnalise" formControlName="modeloAnalise" class="form-control">
-        <option value="" disabled selected>Selecione um modelo</option>
-        <option *ngFor="let modelo of analiseModelos" [value]="modelo.descricao">
+        <option value="" disabled>Selecione um modelo</option>
+        <option *ngFor="let modelo of analiseModelos" [ngValue]="modelo">
           {{ modelo.descricao }}
         </option>
       </select>
     </div>
 
-    <!-- Botão para enviar análise -->
+    <!-- Botão -->
     <div class="form-actions">
       <button 
         type="button"

@@ -1,5 +1,5 @@
 export interface PerfilVaga {
-  id: number;
+  idPerfilVaga: string;
   descricao: string;
   requisitos: string;
 }

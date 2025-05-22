@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 export interface ModeloValidacao {
   Descricao: string;
   Prompt: string;
+  idModelo: string;
 }
 
 @Injectable({
@@ -17,10 +18,14 @@ export class ModeloValidacaoService {
   constructor(private http: HttpClient) {}
 
   listarModelos(): Observable<ModeloValidacao[]> {
-    return this.http.get<any>(this.backendUrl).pipe(
-      map(res => res.ModeloDeValidacao) 
-    );
-  }
+  return this.http.get<any>(this.backendUrl).pipe(
+    map(res => res.ModeloDeValidacao.map((item: any) => ({
+      idModelo: item.IdModelo,   // Faz o mapeamento correto
+      Descricao: item.Descricao,
+      Prompt: item.Prompt
+    })))
+  );
+}
 
   salvarModelos(modelos: ModeloValidacao[]): Observable<any> {
     return this.http.post(this.analiseUrl, { ModeloDeValidacao: modelos }, { responseType: 'text' });
