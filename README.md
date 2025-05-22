@@ -1,6 +1,13 @@
 # CandidatoApp
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
+## Development dependencies
+
+To start a local development dependencies, run:
+
+```bash
+npm install
+```
 
 ## Development server
 
