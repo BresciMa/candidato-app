@@ -12,10 +12,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class PerfilVagaComponent implements OnInit {
   perfis: PerfilVaga[] = [];
-  novoPerfil: PerfilVaga = { Descricao: '', Requisitos: '' };
+  novoPerfil: PerfilVaga = { Descricao: '', Requisitos: '', IdPerfilVaga: '' };
+  idPerfisDisponiveis: string[] = [];
   editandoPerfil: PerfilVaga | null = null;
   novaDescricao: string = '';
   novosRequisitos: string = '';
+  novoIdPerfilVaga: string = '';
 
   constructor(private perfilService: PerfilVagaService) {}
 
@@ -32,7 +34,7 @@ export class PerfilVagaComponent implements OnInit {
 
   adicionarPerfil() {
     this.perfis.push({ ...this.novoPerfil });
-    this.novoPerfil = { Descricao: '', Requisitos: '' };
+    this.novoPerfil = { Descricao: '', Requisitos: '', IdPerfilVaga: '' };
     this.salvar();
   }
 

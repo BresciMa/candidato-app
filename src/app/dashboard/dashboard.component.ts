@@ -21,6 +21,7 @@ interface Padronizacoes {
 interface VagaPerfil {
   descricao: string;
   requisito: string;
+  idPerfilVaga: string;
 }
 
 interface ModeloAnalise {
@@ -82,7 +83,8 @@ export class DashboardComponent implements OnInit {
   private mapVagaPerfis(rawPerfis: any[]): VagaPerfil[] {
     return rawPerfis.map(perfil => ({
       descricao: perfil.Descricao,
-      requisito: perfil.Requisitos
+      requisito: perfil.Requisitos,
+      idPerfilVaga: perfil.IdPerfilVaga // <-- Ajuste aqui: deve bater com o backend
     }));
   }
 
@@ -151,7 +153,7 @@ export class DashboardComponent implements OnInit {
     const perfilDescricao = this.form.value.perfilVaga;
     const perfilSelecionado = this.vagaPerfis.find(p => p.descricao === perfilDescricao);
     const tipoPerfil = this.detectarTipoPerfil(perfilDescricao);
-
+    const idPerfilVaga = perfilSelecionado?.idPerfilVaga ?? '';
     const modeloSelecionado: ModeloAnalise = this.form.value.modeloAnalise;
 
     const salarioPedido = this.form.value.salarioPedido;
@@ -161,6 +163,7 @@ export class DashboardComponent implements OnInit {
     formData.append('perfilDescricao', perfilDescricao);
     formData.append('tipoPerfil', tipoPerfil);
     formData.append('requisitoPerfil', perfilSelecionado?.requisito ?? '');
+    formData.append('idPerfilVaga', idPerfilVaga);
 
     formData.append('modeloDescricao', modeloSelecionado.descricao);
     formData.append('promptModelo', modeloSelecionado.prompt);

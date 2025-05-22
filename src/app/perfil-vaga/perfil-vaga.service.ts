@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 export interface PerfilVaga {
   Descricao: string;
   Requisitos: string;
+  IdPerfilVaga: string;
 }
 
 @Injectable({
@@ -17,7 +18,13 @@ export class PerfilVagaService {
   constructor(private http: HttpClient) {}
 
   listarPerfis(): Observable<PerfilVaga[]> {
-    return this.http.get<any>(this.backendUrl).pipe(map(res => res.PerfilVaga));
+    return this.http.get<any>(this.backendUrl).pipe(
+      map(res => res.PerfilVaga.map((item: any) => ({
+        IdPerfilVaga: item.IdPerfilVaga,   // Faz o mapeamento correto
+        Descricao: item.Descricao,
+        Requisitos: item.Requisitos
+      })))
+    );
   }
   
   salvarPerfis(perfis: PerfilVaga[]): Observable<any> {

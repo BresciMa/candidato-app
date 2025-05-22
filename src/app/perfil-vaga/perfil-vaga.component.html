@@ -3,6 +3,7 @@
 
   <div class="card">
     <div class="formulario">
+      <input type="text" placeholder="IdPerfilVaga" [(ngModel)]="novoIdPerfilVaga" />
       <input type="text" placeholder="Descrição" [(ngModel)]="novaDescricao" />
       <input type="text" placeholder="Requisitos" [(ngModel)]="novosRequisitos" />
       <button class="btn-adicionar" (click)="adicionarPerfil()">➕ Incluir Perfil</button>
@@ -18,6 +19,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let perfil of perfis; let i = index">
+          <td><input [(ngModel)]="perfil.IdPerfilVaga" /></td>
           <td><input [(ngModel)]="perfil.Descricao" /></td>
           <td><input [(ngModel)]="perfil.Requisitos" /></td>
           <td><button (click)="removerPerfil(i)">🗑️ Remover</button></td>

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ModeloValidacao, ModeloValidacaoService } from './modelo-validacao.service';
 import { FormsModule } from '@angular/forms';
 
-
 @Component({
   selector: 'app-modelo-validacao',
   standalone: true,
