@@ -1,0 +1,17 @@
+<div class="login-container">
+  <h2>Login</h2>
+
+  <div class="form-group">
+    <input type="text" placeholder="Usuário" [(ngModel)]="usuario" />
+  </div>
+
+  <div class="form-group">
+    <input type="password" placeholder="Senha" [(ngModel)]="senha" />
+  </div>
+
+  <button (click)="login()">Entrar</button>
+
+  <div class="error-message" *ngIf="loginInvalido">
+    Usuário ou senha inválidos.
+  </div>
+</div>

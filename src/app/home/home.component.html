@@ -1,0 +1,16 @@
+<h1>Bem-vindo à Home</h1>
+
+<nav>
+  <a routerLink="dashboard">Dashboard</a> |
+  <a routerLink="perfil-vaga">Perfil de Vaga</a> |
+  <a routerLink="modelo-validacao">Modelo de Validação</a> |
+
+   <!-- Botão de Logout -->
+  <button (click)="logout()" style="margin-left: 20px;">
+    🔓 Logout
+  </button>
+</nav>
+
+<hr>
+
+<router-outlet></router-outlet>

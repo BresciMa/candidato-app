@@ -1,0 +1,62 @@
+<div class="form-container">
+  <h2 class="form-title">Validação de Candidato</h2>
+
+  <form [formGroup]="form">
+    <!-- Upload -->
+    <div class="form-group">
+      <label class="file-upload-label">
+        <input #fileInput type="file" accept=".txt" hidden (change)="onFileSelected($event)">
+        <button type="button" class="file-upload-button" (click)="triggerFileInput()">
+          📁 Incluir Transcrição
+        </button>
+      </label>
+      <div *ngIf="form.get('transcricaoArquivo')?.value" class="file-upload-success">
+        Arquivo carregado: {{ form.get('transcricaoArquivo')?.value?.name }} ({{ conteudoArquivo.length }} caracteres)
+      </div>
+    </div>
+
+    <!-- Perfil -->
+    <div class="form-group">
+      <label for="perfilVaga">Selecionar o Perfil da Vaga:</label>
+      <select id="perfilVaga" formControlName="perfilVaga" class="form-control">
+        <option value="" disabled>Selecione um perfil</option>
+        <option *ngFor="let perfil of vagaPerfis" [value]="perfil.descricao">
+          {{ perfil.descricao }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Salário -->
+    <div class="form-group">
+      <label for="salarioPedido">Incluir Salário Pedido:</label>
+      <input 
+        id="salarioPedido"
+        type="text" 
+        formControlName="salarioPedido" 
+        class="form-control" 
+        placeholder="Digite o salário pedido">
+    </div>
+
+    <!-- Modelo de Análise -->
+    <div class="form-group">
+      <label for="modeloAnalise">Modelo da Análise e Resultado:</label>
+      <select id="modeloAnalise" formControlName="modeloAnalise" class="form-control">
+        <option value="" disabled>Selecione um modelo</option>
+        <option *ngFor="let modelo of analiseModelos" [ngValue]="modelo">
+          {{ modelo.descricao }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Botão -->
+    <div class="form-actions">
+      <button 
+        type="button"
+        class="submit-button" 
+        [disabled]="!formValido"
+        (click)="enviarAnalise()">
+        Enviar para análise
+      </button>
+    </div>
+  </form>
+</div>
