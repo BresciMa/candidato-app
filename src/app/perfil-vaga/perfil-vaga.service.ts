@@ -12,8 +12,8 @@ export interface PerfilVaga {
   providedIn: 'root',
 })
 export class PerfilVagaService {
-   private readonly backendUrl = '/api/whatsapp/candidatos/backend.php';
-   private readonly analiseUrl = '/api/whatsapp/candidatos/analise.php';
+   private readonly backendUrl = '/api/backend.php';
+   private readonly analiseUrl = '/api/analise.php';
 
   constructor(private http: HttpClient) {}
 

@@ -12,8 +12,8 @@ export interface ModeloValidacao {
   providedIn: 'root',
 })
 export class ModeloValidacaoService {
-   private readonly backendUrl = '/api/whatsapp/candidatos/backend.php';
-   private readonly analiseUrl = '/api/whatsapp/candidatos/analise.php';
+   private readonly backendUrl = '/api/backend.php';
+   private readonly analiseUrl = '/api/analise.php';
 
   constructor(private http: HttpClient) {}
 

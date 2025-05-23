@@ -1,11 +1,10 @@
 {
   "/api": {
-    "target": "https://marceloj.com",
-    "secure": true,
+    "target": "https://marceloj.com/whatsapp/candidatos",
+    "secure": false,
     "changeOrigin": true,
     "pathRewrite": {
       "^/api": ""
-    },
-    "logLevel": "debug"
+    }
   }
 }

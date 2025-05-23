@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private loadPerfisEPadronizacoes(): void {
-    this.http.get<any>('/api/whatsapp/candidatos/backend.php').subscribe({
+    this.http.get<any>('/api/backend.php').subscribe({
       next: data => {
         this.vagaPerfis = this.mapVagaPerfis(data.PerfilVaga);
         this.padronizacoes = {
@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private loadModelosAnalise(): void {
-    this.http.get<any>('/api/whatsapp/candidatos/backend.php').subscribe({
+    this.http.get<any>('/api/backend.php').subscribe({
       next: data => {
         this.analiseModelos = this.mapModelosAnalise(data.ModeloDeValidacao);
       },
@@ -186,7 +186,7 @@ export class DashboardComponent implements OnInit {
       console.log(`${key}:`, value);
     }
 
-    this.http.post('/api/whatsapp/candidatos/analise.php', formData, { responseType: 'text' })
+    this.http.post('/api/analise.php', formData, { responseType: 'text' })
       .subscribe({
         next: (res) => {
           console.log('Resposta recebida:', res);
