@@ -9,8 +9,9 @@ export interface PerfilVaga {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
+
 export class PerfilVagaService {
    private readonly backendUrl = '/api/backend.php';
    private readonly analiseUrl = '/api/analise.php';

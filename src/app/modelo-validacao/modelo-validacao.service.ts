@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { Modelo } from './modelo.model';
 
 export interface ModeloValidacao {
   Descricao: string;
@@ -10,8 +9,9 @@ export interface ModeloValidacao {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
+
 export class ModeloValidacaoService {
    private readonly backendUrl = '/api/backend.php';
    private readonly analiseUrl = '/api/analise.php';

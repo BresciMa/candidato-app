@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-modelo-validacao',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
+  providers: [ModeloValidacaoService],
   templateUrl: './modelo-validacao.component.html',
   styleUrls: ['./modelo-validacao.component.css'],
 })

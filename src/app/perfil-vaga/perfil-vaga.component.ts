@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-perfil-vaga',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
+  providers: [PerfilVagaService],
   templateUrl: './perfil-vaga.component.html',
   styleUrls: ['./perfil-vaga.component.css'],
 })
