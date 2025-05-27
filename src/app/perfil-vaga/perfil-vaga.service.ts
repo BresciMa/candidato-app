@@ -26,7 +26,25 @@ export class PerfilVagaService {
       })))
     );
   }
-  
+
+  removerPerfil(id: string): Observable<any> {
+    return this.http.delete(`${this.analiseUrl}?id=${id}`);
+  }
+
+  criarPerfil(perfil: PerfilVaga): Observable<any> {
+    return this.http.post(this.analiseUrl, {
+      action: 'create',
+      PerfilVaga: perfil
+    });
+  }
+
+  atualizarPerfil(perfil: PerfilVaga): Observable<any> {
+    return this.http.put(`${this.analiseUrl}?id=${perfil.IdPerfilVaga}`, {
+      action: 'update',
+      PerfilVaga: perfil
+    });
+  }
+
   salvarPerfis(perfis: PerfilVaga[]): Observable<any> {
     return this.http.post(this.analiseUrl, { PerfilVaga: perfis }, { responseType: 'text' });
   }

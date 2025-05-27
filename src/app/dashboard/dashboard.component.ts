@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -44,12 +44,19 @@ export class DashboardComponent implements OnInit {
   analiseModelos: ModeloAnalise[] = [];
   padronizacoes: Padronizacoes = { TempoExperiencia: [], FaixaSalarial: [] };
 
+    @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+    @ViewChild('fileCurriculo') fileCurriculo!: ElementRef<HTMLInputElement>;
+
+    transcricaoArquivo: File | null = null;
+    curriculoArquivo: File | null = null;
+
   constructor(private fb: FormBuilder, private http: HttpClient) {
     this.form = this.fb.group({
       perfilVaga: ['', Validators.required],
       salarioPedido: ['', Validators.required],
-      modeloAnalise: [null, Validators.required], // <-- Agora armazena o objeto inteiro
-      transcricaoArquivo: [null, Validators.required]
+      modeloAnalise: [null, Validators.required],
+      transcricaoArquivo: [null, Validators.required],
+      curriculoArquivo: [null, Validators.required]
     });
   }
 
@@ -100,24 +107,29 @@ export class DashboardComponent implements OnInit {
     return this.form.valid;
   }
 
-  triggerFileInput() {
-    document.querySelector<HTMLInputElement>('input[type="file"]')?.click();
+  triggerFileInput(tipo: 'transcricaoArquivo' | 'curriculoArquivo') {
+    if (tipo === 'transcricaoArquivo') {
+      this.fileInput.nativeElement.click();
+    } else if (tipo === 'curriculoArquivo') {
+      this.fileCurriculo.nativeElement.click();
+    }
   }
 
-  onFileSelected(event: Event) {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-      if (file.type !== 'text/plain') {
-        alert('Por favor, selecione um arquivo .txt');
-        return;
+  onFileSelected(event: Event, tipo: 'transcricaoArquivo' | 'curriculoArquivo') {
+     const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      if (tipo === 'transcricaoArquivo') {
+        this.transcricaoArquivo = file;
+      } else if (tipo === 'curriculoArquivo') {
+        this.curriculoArquivo = file;
       }
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.conteudoArquivo = reader.result as string;
-        this.form.patchValue({ transcricaoArquivo: file });
-      };
-      reader.readAsText(file);
+      // Atualiza o FormControl com o arquivo selecionado
+      this.form.get(tipo)?.setValue(file);
+      this.form.get(tipo)?.markAsDirty();
+      this.form.get(tipo)?.updateValueAndValidity();
     }
+
   }
 
   private detectarTipoPerfil(descricao: string): string {
@@ -173,10 +185,19 @@ export class DashboardComponent implements OnInit {
     formData.append('experienciaEsperada', experienciaEsperada);
     formData.append('faixaSalarialEsperada', faixaSalarialEsperada);
 
-    const arquivo = this.form.get('transcricaoArquivo')?.value;
-    if (arquivo) {
-      formData.append('cvFile', arquivo, arquivo.name);
-      formData.append('transcricaoentrevista', arquivo, arquivo.name);
+    const arquivoTranscricao = this.form.get('transcricaoArquivo')?.value;
+    const arquivoCurriculo = this.form.get('curriculoArquivo')?.value;
+
+    if (arquivoTranscricao) {
+      formData.append('cvFile', arquivoTranscricao, arquivoTranscricao.name);
+      formData.append('transcricaoentrevista', arquivoTranscricao, arquivoTranscricao.name);
+    } else {
+      alert('Selecione um arquivo válido');
+      return;
+    }
+
+    if (arquivoCurriculo) {
+      formData.append('curriculoFile', arquivoCurriculo, arquivoCurriculo.name);
     } else {
       alert('Selecione um arquivo válido');
       return;
