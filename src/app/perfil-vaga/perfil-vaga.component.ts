@@ -20,12 +20,14 @@ export class PerfilVagaComponent implements OnInit {
   novosRequisitos: string = '';
   novoIdPerfilVaga: string = '';
   editando = false;
+  modoEdicao: boolean = false;
 
   constructor(private perfilService: PerfilVagaService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
   editarPerfil(perfil: PerfilVaga) {
+    this.modoEdicao = true;
     this.router.navigate(['/home/perfil-vaga/editar', perfil.IdPerfilVaga], {
       state: { perfil }
     });
@@ -59,8 +61,9 @@ export class PerfilVagaComponent implements OnInit {
   }
 
   adicionarPerfil() {
-    this.perfis.push({ ...this.novoPerfil });
     this.novoPerfil = { Descricao: '', Requisitos: '', IdPerfilVaga: '' };
+    this.modoEdicao = false;  // Define como inclusão
+    this.perfis.push({ ...this.novoPerfil });
     this.salvar();
   }
 

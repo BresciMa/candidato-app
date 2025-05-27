@@ -1,31 +1,33 @@
-<div class="container">
-  <h2 class="titulo">Perfis de Vaga</h2>
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Gestão de Perfis de Vaga</h1>
+    <button class="bg-yellow-500 hover:bg-yellow-600 text-blue px-4 py-2 rounded-lg shadow flex items-center gap-2" [routerLink]="['/home/perfil-vaga/novo']">
+      <span class="text-xl" >➕</span> Incluir Perfil
+    </button>
+  </div>
 
-  <div class="card">
-    <div class="cabecalho">
-      <div></div> <!-- espaço vazio para alinhar -->
-      <a class="btn-adicionar" [routerLink]="['/home/perfil-vaga/novo']">➕ Incluir Perfil</a>
-    </div>
-
-    <table>
-      <thead>
+  <div class="bg-white rounded-2xl shadow-md overflow-x-auto">
+    <table class="w-full text-left table-auto">
+      <thead class="bg-gray-100">
         <tr>
-          <th>ID</th>
-          <th>Descrição</th>
-          <th>Requisitos</th>
-          <th>Ações</th>
+          <th class="p-4 font-semibold">ID</th>
+          <th class="p-4 font-semibold">Descrição</th>
+          <th class="p-4 font-semibold">Requisitos</th>
+          <th class="p-4 font-semibold text-center">Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let perfil of perfis">
-          <td>{{ perfil.IdPerfilVaga }}</td>
-          <td>{{ perfil.Descricao }}</td>
-          <td>{{ perfil.Requisitos }}</td>
-          <td>
-            <button class="btn-editar" (click)="editarPerfil(perfil)">
+        <tr class="hover:bg-gray-50 border-b" *ngFor="let perfil of perfis">
+          <td class="p-4">{{ perfil.IdPerfilVaga }}</td>
+          <td class="p-4">{{ perfil.Descricao }}</td>
+          <td class="p-4">{{ perfil.Requisitos }}</td>
+          <td class="p-4 flex justify-center gap-3">
+            <button class="bg-amber-500 hover:bg-amber-600 text-white p-2 rounded-lg shadow"
+              title="Editar" (click)="editarPerfil(perfil)">
               ✏️
             </button>
-            <button class="btn-remover" (click)="removerPerfil(perfil.IdPerfilVaga)">
+            <button class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg shadow"
+              title="Excluir" (click)="removerPerfil(perfil.IdPerfilVaga)">
               🗑️
             </button>
           </td>
@@ -34,3 +36,10 @@
     </table>
   </div>
 </div>
+
+<!--
+export interface PerfilVaga {
+  idPerfilVaga: string;
+  descricao: string;
+  requisitos: string;
+} -->

@@ -1,45 +1,46 @@
-<div class="container mt-5">
-  <h2 class="text-center mb-4">Novo Perfil de Vaga</h2>
+<div style="max-width: 600px; margin: 50px auto; padding: 30px; background-color: #fff; border-radius: 12px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
 
-  <div class="card shadow rounded-4">
-    <div class="card-body">
+    <h1 style="font-weight: bold;">
+        {{ modoEdicao ? 'Perfil de Vaga' : 'Novo Perfil de Vaga' }}
+    </h1>
 
-      <form (ngSubmit)="salvar()">
-        <div class="mb-3">
-          <label for="idPerfilVaga" class="form-label fw-bold">ID Perfil Vaga</label>
-          <input type="text" class="form-control" id="idPerfilVaga"
-                placeholder="Informe o ID"
-                [(ngModel)]="perfilVaga.IdPerfilVaga"
-                name="IdPerfilVaga"
-                [disabled]="isEditMode">
-        </div>
-
-        <div class="mb-3">
-          <label for="descricao" class="form-label fw-bold">Descrição</label>
-          <textarea class="form-control" id="descricao" rows="2"
-                    placeholder="Descreva o perfil"
-                    [(ngModel)]="perfilVaga.Descricao"
-                    name="Descricao"></textarea>
-        </div>
-
-        <div class="mb-3">
-          <label for="requisitos" class="form-label fw-bold">Requisitos</label>
-          <textarea class="form-control" id="requisitos" rows="3"
-                    placeholder="Informe os requisitos"
-                    [(ngModel)]="perfilVaga.Requisitos"
-                    name="Requisitos"></textarea>
-        </div>
-
-        <div class="d-flex justify-content-end gap-2">
-          <button type="submit" class="btn btn-primary">
-            💾 {{ isEditMode ? 'Atualizar' : 'Salvar' }}
-          </button>
-          <button type="button" class="btn btn-secondary" (click)="voltar()">
-            🔙 Voltar
-          </button>
-        </div>
-      </form>
-
+    <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 6px; color: #444;">ID Perfil Vaga</label>
+        <input
+            type="text"
+            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;"
+            [disabled]="modoEdicao"
+            [(ngModel)]="perfilVaga.IdPerfilVaga">
     </div>
-  </div>
+
+    <div style="margin-bottom: 20px;">
+        <label style="display: block; margin-bottom: 6px; color: #444;">Descrição</label>
+        <input
+            type="text"
+            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px;"
+            [(ngModel)]="perfilVaga.Descricao">
+    </div>
+
+    <div style="margin-bottom: 30px;">
+        <label style="display: block; margin-bottom: 6px; color: #444;">Requisitos</label>
+        <textarea
+            rows="3"
+            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; resize: vertical;"
+            [(ngModel)]="perfilVaga.Requisitos"></textarea>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; gap: 15px;">
+        <button
+            style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 6px; cursor: pointer;"
+            (click)="salvar()">
+            💾 Salvar
+        </button>
+
+        <button
+            style="padding: 10px 20px; background-color: #6c757d; color: white; border: none; border-radius: 6px; cursor: pointer;"
+            (click)="voltar()">
+            ↩️ Voltar
+        </button>
+    </div>
+
 </div>

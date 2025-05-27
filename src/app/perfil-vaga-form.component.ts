@@ -17,7 +17,7 @@ export class PerfilVagaFormComponent implements OnInit {
     Descricao: '',
     Requisitos: ''
   };
-  isEditMode = false;
+  modoEdicao = false;
 
   constructor(
     private perfilService: PerfilVagaService,
@@ -30,7 +30,7 @@ export class PerfilVagaFormComponent implements OnInit {
     const state = history.state;
     if (state && state.perfil) {
       this.perfilVaga = { ...state.perfil };
-      this.isEditMode = true;
+      this.modoEdicao = true;
     }
 
     // Alternative approach using route params
@@ -41,7 +41,7 @@ export class PerfilVagaFormComponent implements OnInit {
           const perfilEncontrado = perfis.find(p => p.IdPerfilVaga === id);
           if (perfilEncontrado) {
             this.perfilVaga = { ...perfilEncontrado };
-            this.isEditMode = true;
+            this.modoEdicao = true;
           }
         },
         error: (err) => console.error('Error loading profile', err)
@@ -50,7 +50,7 @@ export class PerfilVagaFormComponent implements OnInit {
   }
 
   salvar() {
-    if (this.isEditMode) {
+    if (this.modoEdicao) {
       // Update existing profile
       this.perfilService.atualizarPerfil(this.perfilVaga).subscribe({
         next: () => {
