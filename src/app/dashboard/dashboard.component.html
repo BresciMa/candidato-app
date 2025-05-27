@@ -1,5 +1,5 @@
 <div class="form-container">
-  <h2 class="form-title">Validação de Candidato</h2>
+  <h2 class="form-title">Análise de Candidato</h2>
 
   <form [formGroup]="form">
     <!-- Upload Transcrição -->
@@ -40,15 +40,22 @@
     </div>
 
     <!-- Salário -->
-    <div class="form-group">
-      <label for="salarioPedido">Incluir Salário Pedido:</label>
-      <input
-        id="salarioPedido"
-        type="text"
-        formControlName="salarioPedido"
-        class="form-control"
-        placeholder="Digite o salário pedido">
-    </div>
+    <input
+      id="salarioPedido"
+      type="text"
+      formControlName="salarioPedido"
+      class="form-control"
+      placeholder="Digite o salário pedido"
+      currencyMask
+      [options]="{
+        prefix: 'R$ ',
+        thousands: '.',
+        decimal: ',',
+        allowNegative: false,
+        precision: 2,
+        align: 'right'
+      }"
+    />
 
     <!-- Modelo de Análise -->
     <div class="form-group">

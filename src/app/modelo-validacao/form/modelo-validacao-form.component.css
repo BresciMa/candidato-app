@@ -1,5 +1,5 @@
 /* Container principal */
-.perfil-vaga-container {
+.modelo-validacao-container {
   max-width: 600px;
   margin: 50px auto;
   padding: 30px;
@@ -9,7 +9,7 @@
 }
 
 /* Título */
-.perfil-vaga-title {
+.modelo-validacao-title {
   font-weight: bold;
   margin-bottom: 24px;
   color: #333;

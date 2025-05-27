@@ -1,13 +1,13 @@
-<div class="perfil-vaga-container">
-  <h1 class="perfil-vaga-title">
+<div class="modelo-validacao-container">
+  <h1 class="modelo-validacao-title">
     {{ modoEdicao ? 'Modelo de Validação' : 'Novo Modelo de Validação' }}
   </h1>
 
-  <!-- ID do Perfil -->
+  <!-- ID do Modelo -->
   <div class="form-group">
-    <label for="idPerfilVaga">ID Perfil Vaga</label>
+    <label for="idModelo">ID Modelo</label>
     <input
-      id="idPerfilVaga"
+      id="idModelo"
       type="text"
       [disabled]="modoEdicao"
       [(ngModel)]="modeloValidacao.idModelo"
