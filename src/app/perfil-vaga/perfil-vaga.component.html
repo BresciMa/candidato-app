@@ -1,34 +1,45 @@
-<div class="container">
-  <h2 class="titulo">Perfis de Vaga</h2>
-
-  <div class="card">
-    <div class="formulario">
-      <input type="text" placeholder="IdPerfilVaga" [(ngModel)]="novoIdPerfilVaga" />
-      <input type="text" placeholder="Descrição" [(ngModel)]="novaDescricao" />
-      <input type="text" placeholder="Requisitos" [(ngModel)]="novosRequisitos" />
-      <button class="btn-adicionar" (click)="adicionarPerfil()">➕ Incluir Perfil</button>
-    </div>
-
-    <table>
-      <thead>
+<div class="p-6">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Gestão de Perfis de Vaga</h1>
+    <button class="bg-yellow-500 hover:bg-yellow-600 text-blue px-4 py-2 rounded-lg shadow flex items-center gap-2" [routerLink]="['/home/perfil-vaga/novo']">
+      <span class="text-xl" >➕</span> Incluir Perfil
+    </button>
+  </div>
+<p></p>
+  <div class="bg-white rounded-2xl shadow-md overflow-x-auto">
+    <table class="w-full text-left table-auto">
+      <thead class="bg-gray-100">
         <tr>
-          <th>Descrição</th>
-          <th>Requisitos</th>
-          <th>Ações</th>
+          <th class="p-4 font-semibold">ID</th>
+          <th class="p-4 font-semibold">Descrição</th>
+          <th class="p-4 font-semibold">Requisitos</th>
+          <th class="p-4 font-semibold text-center">Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let perfil of perfis; let i = index">
-          <td><input [(ngModel)]="perfil.IdPerfilVaga" /></td>
-          <td><input [(ngModel)]="perfil.Descricao" /></td>
-          <td><input [(ngModel)]="perfil.Requisitos" /></td>
-          <td><button (click)="removerPerfil(i)">🗑️ Remover</button></td>
+        <tr class="hover:bg-gray-50 border-b" *ngFor="let perfil of perfis">
+          <td class="p-4">{{ perfil.IdPerfilVaga }}</td>
+          <td class="p-4">{{ perfil.Descricao }}</td>
+          <td class="p-4">{{ perfil.Requisitos }}</td>
+          <td class="p-4 flex justify-center gap-3">
+            <button class="bg-amber-500 hover:bg-amber-600 text-white p-2 rounded-lg shadow"
+              title="Editar" (click)="editarPerfil(perfil)">
+              ✏️
+            </button>
+            <button class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg shadow"
+              title="Excluir" (click)="removerPerfil(perfil.IdPerfilVaga)">
+              🗑️
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
-
-    <div class="botoes">
-      <button class="btn-salvar" (click)="salvar()">💾 Salvar Tudo</button>
-    </div>
   </div>
 </div>
+
+<!--
+export interface PerfilVaga {
+  idPerfilVaga: string;
+  descricao: string;
+  requisitos: string;
+} -->

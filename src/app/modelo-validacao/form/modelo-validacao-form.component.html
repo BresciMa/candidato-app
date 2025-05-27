@@ -1,0 +1,46 @@
+<div class="modelo-validacao-container">
+  <h1 class="modelo-validacao-title">
+    {{ modoEdicao ? 'Modelo de Validação' : 'Novo Modelo de Validação' }}
+  </h1>
+
+  <!-- ID do Modelo -->
+  <div class="form-group">
+    <label for="idModelo">ID Modelo</label>
+    <input
+      id="idModelo"
+      type="text"
+      [disabled]="modoEdicao"
+      [(ngModel)]="modeloValidacao.idModelo"
+      class="form-control">
+  </div>
+
+  <!-- Descrição -->
+  <div class="form-group">
+    <label for="descricao">Descrição</label>
+    <input
+      id="descricao"
+      type="text"
+      [(ngModel)]="modeloValidacao.Descricao"
+      class="form-control">
+  </div>
+
+  <!-- Prompt -->
+  <div class="form-group">
+    <label for="prompt">Prompt</label>
+    <textarea
+      id="prompt"
+      rows="3"
+      [(ngModel)]="modeloValidacao.Prompt"
+      class="form-control"></textarea>
+  </div>
+
+  <!-- Botões -->
+  <div class="form-actions">
+    <button class="btn btn-primary" (click)="salvar()">
+      💾 Salvar
+    </button>
+    <button class="btn btn-secondary" (click)="voltar()">
+      ↩️ Voltar
+    </button>
+  </div>
+</div>

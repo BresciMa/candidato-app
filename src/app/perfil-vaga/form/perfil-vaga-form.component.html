@@ -1,0 +1,46 @@
+<div class="perfil-vaga-container">
+  <h1 class="perfil-vaga-title">
+    {{ modoEdicao ? 'Perfil de Vaga' : 'Novo Perfil de Vaga' }}
+  </h1>
+
+  <!-- ID do Perfil -->
+  <div class="form-group">
+    <label for="idPerfilVaga">ID Perfil Vaga</label>
+    <input
+      id="idPerfilVaga"
+      type="text"
+      [disabled]="modoEdicao"
+      [(ngModel)]="perfilVaga.IdPerfilVaga"
+      class="form-control">
+  </div>
+
+  <!-- Descrição -->
+  <div class="form-group">
+    <label for="descricao">Descrição</label>
+    <input
+      id="descricao"
+      type="text"
+      [(ngModel)]="perfilVaga.Descricao"
+      class="form-control">
+  </div>
+
+  <!-- Requisitos -->
+  <div class="form-group">
+    <label for="requisitos">Requisitos</label>
+    <textarea
+      id="requisitos"
+      rows="3"
+      [(ngModel)]="perfilVaga.Requisitos"
+      class="form-control"></textarea>
+  </div>
+
+  <!-- Botões -->
+  <div class="form-actions">
+    <button class="btn btn-primary" (click)="salvar()">
+      💾 Salvar
+    </button>
+    <button class="btn btn-secondary" (click)="voltar()">
+      ↩️ Voltar
+    </button>
+  </div>
+</div>

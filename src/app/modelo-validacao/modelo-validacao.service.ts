@@ -9,11 +9,12 @@ export interface ModeloValidacao {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
+
 export class ModeloValidacaoService {
-   private readonly backendUrl = '/api/whatsapp/candidatos/backend.php';
-   private readonly analiseUrl = '/api/whatsapp/candidatos/analise.php';
+   private readonly backendUrl = '/api/backend.php';
+   private readonly analiseUrl = '/api/analise.php';
 
   constructor(private http: HttpClient) {}
 
@@ -27,7 +28,25 @@ export class ModeloValidacaoService {
     );
 }
 
+  removerModelo(id: string): Observable<any> {
+    return this.http.delete(`${this.analiseUrl}?id=${id}`);
+  }
+
+    criarModelo(modelo: ModeloValidacao): Observable<any> {
+      return this.http.post(this.analiseUrl, {
+        action: 'create',
+        ModeloValidacao: modelo
+      });
+    }
+
+  atualizarModelo(modelo: ModeloValidacao): Observable<any> {
+    return this.http.put(`${this.analiseUrl}?id=${modelo.idModelo}`, {
+      action: 'update',
+      Modelo: modelo
+    });
+  }
+
   salvarModelos(modelos: ModeloValidacao[]): Observable<any> {
-    return this.http.post(this.analiseUrl, { ModeloDeValidacao: modelos }, { responseType: 'text' });
+    return this.http.post(this.analiseUrl, { ModeloValidacao: modelos }, { responseType: 'text' });
   }
 }

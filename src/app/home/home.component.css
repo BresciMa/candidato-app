@@ -1,14 +1,76 @@
+/* Reset básico para listas */
 ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
+
 li {
   margin: 0.5rem 0;
 }
-a {
+
+/* Links de navegação */
+nav a {
   text-decoration: none;
   color: #007bff;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease;
 }
-a:hover {
+
+nav a:hover,
+nav a:focus {
   text-decoration: underline;
+  color: #0056b3;
+  outline: none;
+}
+
+/* Barra de navegação com flexbox */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Estilização do botão logout */
+button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+button:hover,
+button:focus {
+  background-color: #b02a37;
+  outline: none;
+}
+
+/* Título principal */
+h1 {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+/* Linha horizontal com espaçamento */
+hr {
+  margin: 1.5rem 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+/* Container geral para limitar largura e centralizar */
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
