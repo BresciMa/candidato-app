@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
-import { PerfilVaga, PerfilVagaService } from './perfil-vaga/perfil-vaga.service';
+import { PerfilVaga, PerfilVagaService } from '../perfil-vaga.service';
 
 @Component({
   selector: 'app-perfil-vaga-form',

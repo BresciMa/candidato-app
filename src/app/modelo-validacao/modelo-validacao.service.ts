@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { Modelo } from './modelo.model';
 
 export interface ModeloValidacao {
   Descricao: string;
@@ -27,7 +28,25 @@ export class ModeloValidacaoService {
     );
 }
 
+  removerModelo(id: string): Observable<any> {
+    return this.http.delete(`${this.analiseUrl}?id=${id}`);
+  }
+
+    criarModelo(modelo: ModeloValidacao): Observable<any> {
+      return this.http.post(this.analiseUrl, {
+        action: 'create',
+        ModeloValidacao: modelo
+      });
+    }
+
+  atualizarModelo(modelo: ModeloValidacao): Observable<any> {
+    return this.http.put(`${this.analiseUrl}?id=${modelo.idModelo}`, {
+      action: 'update',
+      Modelo: modelo
+    });
+  }
+
   salvarModelos(modelos: ModeloValidacao[]): Observable<any> {
-    return this.http.post(this.analiseUrl, { ModeloDeValidacao: modelos }, { responseType: 'text' });
+    return this.http.post(this.analiseUrl, { ModeloValidacao: modelos }, { responseType: 'text' });
   }
 }

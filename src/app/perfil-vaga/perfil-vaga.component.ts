@@ -26,6 +26,7 @@ export class PerfilVagaComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
+
   editarPerfil(perfil: PerfilVaga) {
     this.modoEdicao = true;
     this.router.navigate(['/home/perfil-vaga/editar', perfil.IdPerfilVaga], {
