@@ -13,8 +13,8 @@ export interface ModeloValidacao {
 })
 
 export class ModeloValidacaoService {
-   private readonly backendUrl = '/api/backend.php';
-   private readonly analiseUrl = '/api/analise.php';
+   private readonly backendUrl = '/backend/backend.php';
+   private readonly analiseUrl = '/api/api-ai-assistent.php';
 
   constructor(private http: HttpClient) {}
 

@@ -7,6 +7,7 @@ import { AuthGuard } from './auth.guard';
 import { HomeComponent } from './home/home.component';
 import { PerfilVagaFormComponent } from './perfil-vaga/form/perfil-vaga-form.component';
 import { ModeloValidacaoFormComponent } from './modelo-validacao/form/modelo-validacao-form.component';
+import { ResultadoAnaliseComponent } from './resultado-analise/resultado-analise.component';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -25,6 +26,8 @@ export const appRoutes: Routes = [
       { path: 'modelo-validacao', component: ModeloValidacaoComponent },
       { path: 'perfil-vaga/editar/:id', component: PerfilVagaFormComponent },
       { path: 'modelo-validacao/editar/:id', component: ModeloValidacaoFormComponent },
+      { path: 'resultado-analise', component: ResultadoAnaliseComponent },
+      { path: '**', redirectTo: '' }
     ],
   },
 
