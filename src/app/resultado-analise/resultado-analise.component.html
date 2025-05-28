@@ -1,8 +1,7 @@
 <div *ngIf="resultado && resultado !== 'Nenhum resultado encontrado.'; else noResult">
-  <h2>Resultado da Análise</h2>
   <div [innerHTML]="resultado"></div>
 </div>
 
 <ng-template #noResult>
-  <p>Nenhum resultado encontrado noresult.</p>
+  <p>Nenhum resultado encontrado.</p>
 </ng-template>
