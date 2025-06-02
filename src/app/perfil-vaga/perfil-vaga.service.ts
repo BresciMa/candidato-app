@@ -13,15 +13,15 @@ export interface PerfilVaga {
 })
 
 export class PerfilVagaService {
-   private readonly backendUrl = '/backend/backend.php';
+   private readonly apiUrl = '/api/perfil-vaga';
    private readonly analiseUrl = '/api/api-ai-assistent.php';
 
   constructor(private http: HttpClient) {}
 
   listarPerfis(): Observable<PerfilVaga[]> {
-    return this.http.get<any>(this.backendUrl).pipe(
-      map(res => res.PerfilVaga.map((item: any) => ({
-        IdPerfilVaga: item.IdPerfilVaga,   // Faz o mapeamento correto
+    return this.http.get<any>(this.apiUrl).pipe(
+      map(res => res.map((item: any) => ({
+        IdPerfilVaga: item.PerfilVaga,   // Faz o mapeamento correto
         Descricao: item.Descricao,
         Requisitos: item.Requisitos
       })))
