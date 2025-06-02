@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://marceloj.com/whatsapp/api",
+    "target": "http://localhost:3000/candidato-api",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {

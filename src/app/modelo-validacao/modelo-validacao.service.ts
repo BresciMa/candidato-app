@@ -13,20 +13,20 @@ export interface ModeloValidacao {
 })
 
 export class ModeloValidacaoService {
-   private readonly backendUrl = '/backend/backend.php';
+   private readonly apiUrl = '/api/modelo-validacao';
    private readonly analiseUrl = '/api/api-ai-assistent.php';
 
   constructor(private http: HttpClient) {}
 
   listarModelos(): Observable<ModeloValidacao[]> {
-    return this.http.get<any>(this.backendUrl).pipe(
-      map(res => res.ModeloDeValidacao.map((item: any) => ({
-        idModelo: item.IdModelo,   // Faz o mapeamento correto
+    return this.http.get<any[]>(this.apiUrl).pipe(
+      map(res => res.map((item: any) => ({
+        idModelo: item.ModeloValidacao,
         Descricao: item.Descricao,
         Prompt: item.Prompt
       })))
     );
-}
+  }
 
   removerModelo(id: string): Observable<any> {
     return this.http.delete(`${this.analiseUrl}?id=${id}`);
