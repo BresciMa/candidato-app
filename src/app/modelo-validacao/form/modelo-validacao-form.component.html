@@ -3,34 +3,38 @@
     {{ modoEdicao ? 'Modelo de Validação' : 'Novo Modelo de Validação' }}
   </h1>
 
+
   <!-- ID do Modelo -->
   <div class="form-group">
-    <label for="idModelo">ID Modelo</label>
+    <!-- ID do Modelo number -->
+    <input id="idModeloValidacao" type="hidden" [(ngModel)]="ModeloValidacao.idModeloValidacao">
+
+    <label for="modeloValidacao">ID Modelo</label>
     <input
-      id="idModelo"
+      id="modeloValidacao"
       type="text"
       [disabled]="modoEdicao"
-      [(ngModel)]="modeloValidacao.idModelo"
+      [(ngModel)]="ModeloValidacao.ModeloValidacao"
       class="form-control">
   </div>
 
   <!-- Descrição -->
   <div class="form-group">
-    <label for="descricao">Descrição</label>
+    <label for="Descricao">Descrição</label>
     <input
-      id="descricao"
+      id="Descricao"
       type="text"
-      [(ngModel)]="modeloValidacao.Descricao"
+      [(ngModel)]="ModeloValidacao.Descricao"
       class="form-control">
   </div>
 
   <!-- Prompt -->
   <div class="form-group">
-    <label for="prompt">Prompt</label>
+    <label for="Prompt">Prompt</label>
     <textarea
-      id="prompt"
+      id="Prompt"
       rows="3"
-      [(ngModel)]="modeloValidacao.Prompt"
+      [(ngModel)]="ModeloValidacao.Prompt"
       class="form-control"></textarea>
   </div>
 

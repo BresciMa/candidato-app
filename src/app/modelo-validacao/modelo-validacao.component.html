@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <tr class="hover:bg-gray-50 border-b" *ngFor="let modelo of modelos">
-          <td class="p-4">{{ modelo.idModelo }}</td>
+          <td class="p-4">{{ modelo.ModeloValidacao }}</td>
           <td class="p-4">{{ modelo.Descricao }}</td>
           <td class="p-4">{{ modelo.Prompt }}</td>
           <td class="p-4 flex justify-center gap-3">
@@ -27,7 +27,7 @@
               ✏️
             </button>
             <button class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg shadow"
-              title="Excluir" (click)="removerModelo(modelo.idModelo)">
+              title="Excluir" (click)="removerModelo(modelo.idModeloValidacao)">
               🗑️
             </button>
           </td>

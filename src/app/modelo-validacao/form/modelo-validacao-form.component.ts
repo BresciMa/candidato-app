@@ -12,10 +12,12 @@ import {  ModeloValidacao, ModeloValidacaoService  } from '../modelo-validacao.s
   styleUrls: ['./modelo-validacao-form.component.css']
 })
 export class ModeloValidacaoFormComponent implements OnInit {
-  modeloValidacao: ModeloValidacao = {
-    idModelo: '',
+    ModeloValidacao: ModeloValidacao = {
+    idModeloValidacao: 0,
+    ModeloValidacao: '',
     Descricao: '',
-    Prompt: ''
+    Prompt: '',
+
   };
   modoEdicao = false;
 
@@ -29,18 +31,18 @@ export class ModeloValidacaoFormComponent implements OnInit {
     // Check if we're editing an existing profile
     const state = history.state;
     if (state && state.modelo) {
-      this.modeloValidacao = { ...state.modelo };
+      this.ModeloValidacao = { ...state.modelo };
       this.modoEdicao = true;
     }
 
     // Alternative approach using route params
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('idModeloValidacao');
     if (id) {
       this.modeloService.listarModelos().subscribe({
         next: (modelos) => {
-          const modeloEncontrado = modelos.find(m => m.idModelo === id);
+          const modeloEncontrado = modelos.find(m => m.idModeloValidacao === Number(id));
           if (modeloEncontrado) {
-            this.modeloValidacao = { ...modeloEncontrado };
+            this.ModeloValidacao = { ...modeloEncontrado };
             this.modoEdicao = true;
           }
         },
@@ -52,8 +54,10 @@ export class ModeloValidacaoFormComponent implements OnInit {
   salvar() {
     if (this.modoEdicao) {
       // Update existing model
-      this.modeloService.atualizarModelo(this.modeloValidacao).subscribe({
+      delete this.ModeloValidacao.ModeloValidacao;
+      this.modeloService.atualizarModelo(this.ModeloValidacao).subscribe({
         next: () => {
+          console.log('Enviando modelo atualizado:', this.ModeloValidacao);
           alert('Modelo atualizado com sucesso!');
           this.router.navigate(['/home/modelo-validacao']);
         },
@@ -61,7 +65,8 @@ export class ModeloValidacaoFormComponent implements OnInit {
       });
     } else {
       // Create new model
-      this.modeloService.criarModelo(this.modeloValidacao).subscribe({
+      delete this.ModeloValidacao.idModeloValidacao; // Remove the property if it exists
+      this.modeloService.criarModelo(this.ModeloValidacao).subscribe({
         next: () => {
           alert('Modelo criado com sucesso!');
           this.router.navigate(['/home/modelo-validacao']);

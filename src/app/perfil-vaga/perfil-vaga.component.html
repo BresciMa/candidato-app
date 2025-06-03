@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <tr class="hover:bg-gray-50 border-b" *ngFor="let perfil of perfis">
-          <td class="p-4">{{ perfil.IdPerfilVaga }}</td>
+          <td class="p-4">{{ perfil.PerfilVaga }}</td>
           <td class="p-4">{{ perfil.Descricao }}</td>
           <td class="p-4">{{ perfil.Requisitos }}</td>
           <td class="p-4 flex justify-center gap-3">
@@ -27,7 +27,7 @@
               ✏️
             </button>
             <button class="bg-red-500 hover:bg-red-600 text-white p-2 rounded-lg shadow"
-              title="Excluir" (click)="removerPerfil(perfil.IdPerfilVaga)">
+              title="Excluir" (click)="removerPerfil(perfil.idPerfilVaga)">
               🗑️
             </button>
           </td>

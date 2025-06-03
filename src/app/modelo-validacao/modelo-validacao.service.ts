@@ -3,9 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
 export interface ModeloValidacao {
+  ModeloValidacao: string;
   Descricao: string;
   Prompt: string;
-  idModelo: string;
+  idModeloValidacao: number;
+
 }
 
 @Injectable({
@@ -20,7 +22,8 @@ private readonly backendUrl = '/api/modelo-validacao'
   listarModelos(): Observable<ModeloValidacao[]> {
     return this.http.get<any[]>(this.backendUrl).pipe(
       map(res => res.map((item: any) => ({
-        idModelo: item.ModeloValidacao,
+        idModeloValidacao: item.IdModeloValidacao,
+        ModeloValidacao: item.ModeloValidacao,
         Descricao: item.Descricao,
         Prompt: item.Prompt
       })))
@@ -28,26 +31,35 @@ private readonly backendUrl = '/api/modelo-validacao'
   }
 
   removerModelo(id: string): Observable<any> {
-    return this.http.delete(`${this.backendUrl}?id=${id}`);
+    console.log('Removendo modelo com ID:', id);
+    return this.http.patch(`${this.backendUrl}/${id}`, null);
   }
 
   criarModelo(modelo: ModeloValidacao): Observable<any> {
     return this.http.post(this.backendUrl, {
       Descricao: modelo.Descricao,
       Prompt: modelo.Prompt,
-      ModeloValidacao: modelo.idModelo
+      ModeloValidacao: modelo.ModeloValidacao
     });
   }
 
   atualizarModelo(modelo: ModeloValidacao): Observable<any> {
-    return this.http.put(`${this.backendUrl}?id=${modelo.idModelo}`, {
+    const chave = String(modelo.idModeloValidacao);
+    delete modelo.idModeloValidacao;
+    return this.http.put(`${this.backendUrl}/${chave}`, {
       Descricao: modelo.Descricao,
-      Prompt: modelo.Prompt,
-      ModeloValidacao: modelo.idModelo
+      Prompt: modelo.Prompt
     });
   }
 
-  salvarModelos(modelos: ModeloValidacao[]): Observable<any> {
-    return this.http.post(this.backendUrl, { ModeloValidacao: modelos }, { responseType: 'text' });
+  salvarModelo(modelo: ModeloValidacao): Observable<any> {
+    // Aqui você monta o objeto sem o ID
+    const payload = {
+      ModeloValidacao: modelo.ModeloValidacao,
+      Descricao: modelo.Descricao,
+      Prompt: modelo.Prompt
+    };
+    console.log('Salvando modelo:', payload);
+    return this.http.post(this.backendUrl, payload);
   }
 }

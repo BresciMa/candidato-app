@@ -13,7 +13,8 @@ import { PerfilVaga, PerfilVagaService } from '../perfil-vaga.service';
 })
 export class PerfilVagaFormComponent implements OnInit {
   perfilVaga: PerfilVaga = {
-    IdPerfilVaga: '',
+    idPerfilVaga: 0,
+    PerfilVaga: '',
     Descricao: '',
     Requisitos: ''
   };
@@ -34,11 +35,11 @@ export class PerfilVagaFormComponent implements OnInit {
     }
 
     // Alternative approach using route params
-    const id = this.route.snapshot.paramMap.get('id');
+    const id = this.route.snapshot.paramMap.get('idPerfilVaga');
     if (id) {
       this.perfilService.listarPerfis().subscribe({
         next: (perfis) => {
-          const perfilEncontrado = perfis.find(p => p.IdPerfilVaga === id);
+          const perfilEncontrado = perfis.find(p => p.idPerfilVaga === Number(id));
           if (perfilEncontrado) {
             this.perfilVaga = { ...perfilEncontrado };
             this.modoEdicao = true;

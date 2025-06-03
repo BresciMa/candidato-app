@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class PerfilVagaComponent implements OnInit {
   perfis: PerfilVaga[] = [];
-  novoPerfil: PerfilVaga = { Descricao: '', Requisitos: '', IdPerfilVaga: '' };
+  novoPerfil: PerfilVaga = { Descricao: '', Requisitos: '', idPerfilVaga: 0, PerfilVaga: '' };
   idPerfisDisponiveis: string[] = [];
   editandoPerfil: PerfilVaga | null = null;
   novaDescricao: string = '';
@@ -30,7 +30,7 @@ export class PerfilVagaComponent implements OnInit {
 
   editarPerfil(perfil: PerfilVaga) {
     this.modoEdicao = true;
-    this.router.navigate(['/home/perfil-vaga/editar', perfil.IdPerfilVaga], {
+    this.router.navigate(['/home/perfil-vaga/editar', perfil.idPerfilVaga], {
       state: { perfil }
     });
   }
@@ -42,7 +42,7 @@ export class PerfilVagaComponent implements OnInit {
       this.editando = true;
       this.perfilService.listarPerfis().subscribe({
         next: (data) => {
-          const encontrado = data.find(p => p.IdPerfilVaga === id);
+          const encontrado = data.find(p => p.idPerfilVaga === Number(id));
           if (encontrado) {
             this.novoPerfil = { ...encontrado };
           } else {
@@ -63,13 +63,13 @@ export class PerfilVagaComponent implements OnInit {
   }
 
   adicionarPerfil() {
-    this.novoPerfil = { Descricao: '', Requisitos: '', IdPerfilVaga: '' };
+    this.novoPerfil = { Descricao: '', Requisitos: '', idPerfilVaga: 0, PerfilVaga: '' };
     this.modoEdicao = false;  // Define como inclusão
     this.perfis.push({ ...this.novoPerfil });
     this.salvar();
   }
 
-  removerPerfil(id: string): void {
+  removerPerfil(id: number): void {
     if (confirm('Tem certeza que deseja remover este perfil?')) {
       this.perfilService.removerPerfil(id).subscribe({
         next: () => {
@@ -82,6 +82,7 @@ export class PerfilVagaComponent implements OnInit {
   }
 
   salvar() {
+    delete this.novoPerfil.idPerfilVaga; // Remove the property if it exists
     this.perfilService.salvarPerfis([this.novoPerfil]).subscribe({
       next: () => {
         alert('Perfil salvo com sucesso!');

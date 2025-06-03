@@ -12,9 +12,10 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './modelo-validacao.component.html',
   styleUrls: ['./modelo-validacao.component.css'],
 })
+
 export class ModeloValidacaoComponent implements OnInit {
   modelos: ModeloValidacao[] = [];
-  novoModelo: ModeloValidacao = { Descricao: '', Prompt: '', idModelo: '' };
+  novoModelo: ModeloValidacao = { Descricao: '', Prompt: '', idModeloValidacao: 0, ModeloValidacao: '' };
   idModelosDisponiveis: string[] = [];
   editandoModelo: ModeloValidacao | null = null;
   novaDescricao: string = '';
@@ -22,13 +23,16 @@ export class ModeloValidacaoComponent implements OnInit {
   novoIdModelo: string = '';
   modoEdicao: boolean = false;
 
+
   constructor(private ModeloValidacaoService: ModeloValidacaoService,
+    private modeloValidacaoService: ModeloValidacaoService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   editarModelo(modelo: ModeloValidacao) {
+    console.log('Editando modelo:', modelo);
     this.modoEdicao = true;
-    this.router.navigate(['/home/modelo-validacao/editar', modelo.idModelo], {
+    this.router.navigate(['/home/modelo-validacao/editar', modelo.idModeloValidacao], {
       state: { modelo }
     });
   }
@@ -40,7 +44,7 @@ export class ModeloValidacaoComponent implements OnInit {
       this.modoEdicao = true;
       this.ModeloValidacaoService.listarModelos().subscribe({
         next: (data) => {
-          const encontrado = data.find(p => p.idModelo === id);
+          const encontrado = data.find(p => p.idModeloValidacao === Number(id));
           if (encontrado) {
             this.novoModelo = { ...encontrado };
           } else {
@@ -55,21 +59,23 @@ export class ModeloValidacaoComponent implements OnInit {
 
   carregarModelos() {
     this.ModeloValidacaoService.listarModelos().subscribe({
-      next: (data) => this.modelos = data,
+      next: (data) => {this.modelos = data; console.log('Modelos carregadosasasasa:', this.modelos[0]);},
+
       error: (err) => console.error('Erro ao carregar modelos', err)
     });
+    console.log('Modelos carregadosasasasa:', this.modelos[0]);
   }
 
   adicionarModelo() {
-    this.novoModelo = { Descricao: '', Prompt: '', idModelo: '' };
+    this.novoModelo = { Descricao: '', Prompt: '', idModeloValidacao: 0, ModeloValidacao: '' };
     this.modoEdicao = false;  // Define como inclusão
     this.modelos.push({ ...this.novoModelo });
     this.salvar();
   }
 
-  removerModelo(id: string): void {
+  removerModelo(id: number): void {
     if (confirm('Tem certeza que deseja remover este Modelo?')) {
-      this.ModeloValidacaoService.removerModelo(id).subscribe({
+      this.ModeloValidacaoService.removerModelo(String(id)).subscribe({
         next: () => {
           alert('Modelo removido com sucesso!');
           this.carregarModelos(); // Refresh the list
@@ -80,12 +86,29 @@ export class ModeloValidacaoComponent implements OnInit {
   }
 
   salvar() {
-    this.ModeloValidacaoService.salvarModelos([this.novoModelo]).subscribe({
-      next: () => {
-        alert('Modelo salvo com sucesso!');
-        this.router.navigate(['/home/modelo-validacao']);
-      },
-      error: (err) => console.error('Erro ao salvar modelo', err)
-    });
+    if (this.modoEdicao && this.novoModelo.idModeloValidacao !== 0) {
+      // Atualização
+      this.modeloValidacaoService.atualizarModelo(this.novoModelo).subscribe({
+        next: () => {
+          alert('Modelo atualizado com sucesso!');
+          this.carregarModelos();
+          this.router.navigate(['/home/modelo-validacao']);
+        },
+        error: (err) => console.error('Erro ao atualizar modelo', err)
+      });
+    } else {
+      // Inclusão
+      const modeloParaSalvar = { ...this.novoModelo };
+      delete modeloParaSalvar.idModeloValidacao;  // remove o ID antes de enviar
+
+      this.modeloValidacaoService.salvarModelo(modeloParaSalvar as any).subscribe({
+        next: () => {
+          alert('Modelo salvo com sucesso!');
+          this.carregarModelos();
+          this.router.navigate(['/home/modelo-validacao']);
+        },
+        error: (err) => console.error('Erro ao salvar modelo', err)
+      });
+    }
   }
 }

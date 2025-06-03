@@ -5,20 +5,23 @@
 
   <!-- ID do Perfil -->
   <div class="form-group">
-    <label for="idPerfilVaga">ID Perfil Vaga</label>
+    <!-- ID do Modelo number -->
+    <input id="idPerfilVaga" type="hidden" [(ngModel)]="perfilVaga.idPerfilVaga">
+
+    <label for="PerfilVaga">ID Perfil Vaga</label>
     <input
-      id="idPerfilVaga"
+      id="PerfilVaga"
       type="text"
       [disabled]="modoEdicao"
-      [(ngModel)]="perfilVaga.IdPerfilVaga"
+      [(ngModel)]="perfilVaga.PerfilVaga"
       class="form-control">
   </div>
 
   <!-- Descrição -->
   <div class="form-group">
-    <label for="descricao">Descrição</label>
+    <label for="Descricao">Descrição</label>
     <input
-      id="descricao"
+      id="Descricao"
       type="text"
       [(ngModel)]="perfilVaga.Descricao"
       class="form-control">
@@ -26,9 +29,9 @@
 
   <!-- Requisitos -->
   <div class="form-group">
-    <label for="requisitos">Requisitos</label>
+    <label for="Requisitos">Requisitos</label>
     <textarea
-      id="requisitos"
+      id="Requisitos"
       rows="3"
       [(ngModel)]="perfilVaga.Requisitos"
       class="form-control"></textarea>
