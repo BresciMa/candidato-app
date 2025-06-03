@@ -31,7 +31,10 @@ private readonly backendUrl = '/api/modelo-validacao'
   }
 
   removerModelo(id: string): Observable<any> {
+<<<<<<< HEAD
     console.log('Removendo modelo com ID:', id);
+=======
+>>>>>>> 92f7b63f6be3aa053aee208d292611a2cbc06391
     return this.http.patch(`${this.backendUrl}/${id}`, null);
   }
 
