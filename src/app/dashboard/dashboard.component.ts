@@ -105,24 +105,11 @@ export class DashboardComponent implements OnInit {
     const tipoPerfil = this.detectarTipoPerfil(perfilDescricao);
     const idPerfilVaga = perfilSelecionado?.idPerfilVaga ?? '';
     const modeloSelecionado: ModeloAnalise = this.form.value.modeloAnalise;
-    //const salarioPedido = this.form.value.salarioPedido;
-    //const experienciaEsperada = this.buscarExperienciaEsperada(tipoPerfil);
-    //const faixaSalarialEsperada = this.buscarFaixaSalarialEsperada(tipoPerfil);
 
     formData.append('perfilVaga', idPerfilVaga);
-    //formData.append('tipoPerfil', tipoPerfil);
-    //formData.append('requisitoPerfil', perfilSelecionado?.requisito ?? '');
-    //formData.append('idPerfilVaga', idPerfilVaga);
 
     formData.append('modeloDeValidacao', modeloSelecionado.idModelo);
-    //formData.append('promptModelo', modeloSelecionado.prompt);
-    //formData.append('idModelo', modeloSelecionado.idModelo);
 
-    //formData.append('salarioPedido', salarioPedido);
-    //formData.append('experienciaEsperada', experienciaEsperada);
-    //formData.append('faixaSalarialEsperada', faixaSalarialEsperada);
-
-    //formData.append('cvFile', this.form.value.transcricaoArquivo, this.form.value.transcricaoArquivo.name);
     formData.append('transcricaoentrevista', this.form.value.transcricaoArquivo, this.form.value.transcricaoArquivo.name);
     formData.append('cvFile', this.form.value.curriculoArquivo, this.form.value.curriculoArquivo.name);
 
@@ -130,7 +117,6 @@ export class DashboardComponent implements OnInit {
     this.dashboardService.enviarAnalise(formData).subscribe({
       next: (res) => {
         this.isLoading = false;
-        //console.log('Resposta recebida:', res);
         sessionStorage.setItem('resultadoAnalise', res);
         this.router.navigate(['/home/resultado-analise']);
       },

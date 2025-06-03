@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, map, forkJoin } from 'rxjs';
 
 export interface TempoExperiencia {
   Perfil: string;
@@ -33,6 +33,8 @@ export interface ModeloAnalise {
   providedIn: 'root'
 })
 export class DashboardService {
+  private readonly perfilVagaUrl = '/api/perfil-vaga';
+  private readonly modeloValidacaoUrl = '/api/modelo-validacao';
 
   constructor(private http: HttpClient) { }
 
@@ -41,14 +43,23 @@ export class DashboardService {
     padronizacoes: Padronizacoes;
     modelosAnalise: ModeloAnalise[];
   }> {
-    return this.http.get<any>('/backend/backend.php').pipe(
+    return forkJoin({
+      perfilVaga: this.http.get<any[]>(this.perfilVagaUrl),
+      modeloValidacao: this.http.get<any[]>(this.modeloValidacaoUrl)
+    }).pipe(
       map(data => ({
-        vagaPerfis: this.mapVagaPerfis(data.PerfilVaga),
+        vagaPerfis: this.mapVagaPerfis(data.perfilVaga),
         padronizacoes: {
-          TempoExperiencia: data.Padronizacoes.TempoExperiencia,
-          FaixaSalarial: data.Padronizacoes.FaixaSalarial
+          TempoExperiencia: data.perfilVaga.map(item => ({
+            Perfil: item.Descricao,
+            Experiencia: item.TempoExperiencia
+          })),
+          FaixaSalarial: data.perfilVaga.map(item => ({
+            Perfil: item.Descricao,
+            Salario: item.FaixaSalarial
+          }))
         },
-        modelosAnalise: this.mapModelosAnalise(data.ModeloDeValidacao)
+        modelosAnalise: this.mapModelosAnalise(data.modeloValidacao)
       }))
     );
   }

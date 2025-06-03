@@ -13,13 +13,12 @@ export interface ModeloValidacao {
 })
 
 export class ModeloValidacaoService {
-   private readonly apiUrl = '/api/modelo-validacao';
-   private readonly analiseUrl = '/api/api-ai-assistent.php';
+private readonly backendUrl = '/api/modelo-validacao'
 
   constructor(private http: HttpClient) {}
 
   listarModelos(): Observable<ModeloValidacao[]> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
+    return this.http.get<any[]>(this.backendUrl).pipe(
       map(res => res.map((item: any) => ({
         idModelo: item.ModeloValidacao,
         Descricao: item.Descricao,
@@ -29,24 +28,26 @@ export class ModeloValidacaoService {
   }
 
   removerModelo(id: string): Observable<any> {
-    return this.http.delete(`${this.analiseUrl}?id=${id}`);
+    return this.http.delete(`${this.backendUrl}?id=${id}`);
   }
 
-    criarModelo(modelo: ModeloValidacao): Observable<any> {
-      return this.http.post(this.analiseUrl, {
-        action: 'create',
-        ModeloValidacao: modelo
-      });
-    }
+  criarModelo(modelo: ModeloValidacao): Observable<any> {
+    return this.http.post(this.backendUrl, {
+      Descricao: modelo.Descricao,
+      Prompt: modelo.Prompt,
+      ModeloValidacao: modelo.idModelo
+    });
+  }
 
   atualizarModelo(modelo: ModeloValidacao): Observable<any> {
-    return this.http.put(`${this.analiseUrl}?id=${modelo.idModelo}`, {
-      action: 'update',
-      Modelo: modelo
+    return this.http.put(`${this.backendUrl}?id=${modelo.idModelo}`, {
+      Descricao: modelo.Descricao,
+      Prompt: modelo.Prompt,
+      ModeloValidacao: modelo.idModelo
     });
   }
 
   salvarModelos(modelos: ModeloValidacao[]): Observable<any> {
-    return this.http.post(this.analiseUrl, { ModeloValidacao: modelos }, { responseType: 'text' });
+    return this.http.post(this.backendUrl, { ModeloValidacao: modelos }, { responseType: 'text' });
   }
 }

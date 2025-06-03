@@ -13,36 +13,34 @@ export interface PerfilVaga {
 })
 
 export class PerfilVagaService {
-   private readonly apiUrl = '/api/perfil-vaga';
+   private readonly backendUrl = '/api/perfil-vaga';
    private readonly analiseUrl = '/api/api-ai-assistent.php';
 
   constructor(private http: HttpClient) {}
 
   listarPerfis(): Observable<PerfilVaga[]> {
-    return this.http.get<any>(this.apiUrl).pipe(
-      map(res => res.map((item: any) => ({
-        IdPerfilVaga: item.PerfilVaga,   // Faz o mapeamento correto
-        Descricao: item.Descricao,
-        Requisitos: item.Requisitos
-      })))
-    );
-  }
+  return this.http.get<any>(this.backendUrl).pipe(
+    map(res => res.map((item: any) => ({
+      IdPerfilVaga: item.IdPerfilVaga,
+      Descricao: item.Descricao,
+      Requisitos: item.Requisitos
+    })))
+  );
+}
 
   removerPerfil(id: string): Observable<any> {
     return this.http.delete(`${this.analiseUrl}?id=${id}`);
   }
 
-  criarPerfil(perfil: PerfilVaga): Observable<any> {
-    return this.http.post(this.analiseUrl, {
-      action: 'create',
-      PerfilVaga: perfil
-    });
-  }
+criarPerfil(perfil: PerfilVaga): Observable<any> {
+  return this.http.post(this.backendUrl, perfil);
+}
 
   atualizarPerfil(perfil: PerfilVaga): Observable<any> {
     return this.http.put(`${this.analiseUrl}?id=${perfil.IdPerfilVaga}`, {
-      action: 'update',
-      PerfilVaga: perfil
+      IdPerfilVaga: perfil.IdPerfilVaga,
+      Descricao: perfil.Descricao,
+      Requisitos: perfil.Requisitos
     });
   }
 

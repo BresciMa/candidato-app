@@ -6,13 +6,5 @@
     "pathRewrite": {
       "^/api": ""
     }
-  },
-  "/backend": {
-    "target": "https://marceloj.com/whatsapp/candidatos",
-    "secure": false,
-    "changeOrigin": true,
-    "pathRewrite": {
-      "^/backend": ""
-    }
   }
 }
