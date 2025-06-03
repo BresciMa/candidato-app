@@ -28,7 +28,7 @@ private readonly backendUrl = '/api/modelo-validacao'
   }
 
   removerModelo(id: string): Observable<any> {
-    return this.http.delete(`${this.backendUrl}?id=${id}`);
+    return this.http.patch(`${this.backendUrl}/${id}`, null);
   }
 
   criarModelo(modelo: ModeloValidacao): Observable<any> {
