@@ -65,7 +65,7 @@ export class DashboardService {
   }
 
   enviarAnalise(formData: FormData): Observable<any> {
-    return this.http.post('/api/api-ai-assistent.php', formData, { responseType: 'text' });
+    return this.http.post('/api/analise', formData, { responseType: 'text' }); // endpoint para analise ainda não implementada no backEnd
   }
 
   private mapVagaPerfis(rawPerfis: any[]): VagaPerfil[] {
