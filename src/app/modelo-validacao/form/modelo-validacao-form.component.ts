@@ -57,7 +57,6 @@ export class ModeloValidacaoFormComponent implements OnInit {
       delete this.ModeloValidacao.ModeloValidacao;
       this.modeloService.atualizarModelo(this.ModeloValidacao).subscribe({
         next: () => {
-          console.log('Enviando modelo atualizado:', this.ModeloValidacao);
           alert('Modelo atualizado com sucesso!');
           this.router.navigate(['/home/modelo-validacao']);
         },
