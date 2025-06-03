@@ -30,7 +30,6 @@ export class ModeloValidacaoComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   editarModelo(modelo: ModeloValidacao) {
-    console.log('Editando modelo:', modelo);
     this.modoEdicao = true;
     this.router.navigate(['/home/modelo-validacao/editar', modelo.idModeloValidacao], {
       state: { modelo }
@@ -59,11 +58,10 @@ export class ModeloValidacaoComponent implements OnInit {
 
   carregarModelos() {
     this.ModeloValidacaoService.listarModelos().subscribe({
-      next: (data) => {this.modelos = data; console.log('Modelos carregadosasasasa:', this.modelos[0]);},
-
+      next: (data) => this.modelos = data,
       error: (err) => console.error('Erro ao carregar modelos', err)
     });
-    console.log('Modelos carregadosasasasa:', this.modelos[0]);
+
   }
 
   adicionarModelo() {
