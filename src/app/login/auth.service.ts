@@ -24,14 +24,6 @@ export class AuthService {
     );
   }
 
-/*  login(usuario: string, senha: string): Observable<any> {
-    console.log('Tentando fazer login com:', usuario, senha);
-      return this.http.post(`${this.apiUrl}/login`, {
-        username: usuario,
-        password: senha,
-      });
-    }*/
-
   logout() {
     localStorage.removeItem('token');
   }

@@ -1,0 +1,61 @@
+<div class="form-container">
+  <h2 class="form-title">Análise de Candidato</h2>
+
+  <form [formGroup]="form">
+
+    <!-- Perfil -->
+    <div class="form-group">
+      <label for="perfilVaga">Selecionar o Perfil da Vaga:</label>
+      <select id="perfilVaga" formControlName="perfilVaga" class="form-control">
+        <option value="" disabled>Selecione um perfil</option>
+        <option *ngFor="let perfil of vagaPerfis" [value]="perfil.descricao">
+          {{ perfil.descricao }}
+        </option>
+      </select>
+    </div>
+
+ <!-- Ferramenta -->
+    <div class="form-group">
+      <label for="ferramenta">Selecione a Ferramenta:</label>
+      <select id="ferramenta" formControlName="ferramenta" class="form-control">
+        <option [ngValue]="null" disabled>Selecione uma ferramenta</option>
+        <option *ngFor="let ferramenta of ferramentas" [ngValue]="ferramenta">
+          {{ ferramenta.descricao }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Upload Currículo -->
+    <div class="form-group">
+      <label class="file-upload-label">
+        <input #fileCurriculo type="file" accept=".pdf" hidden (change)="onFileSelected($event, 'curriculoArquivo')">
+        <button type="button" class="file-upload-button" (click)="triggerFileInput('curriculoArquivo')">
+          📄 Selecione o CV do Candidato
+        </button>
+      </label>
+      <div *ngIf="form.get('curriculoArquivo')?.value" class="file-upload-success">
+        Arquivo carregado: {{ form.get('curriculoArquivo')?.value?.name }}
+      </div>
+    </div>
+
+    <!-- Dados Adicionais -->
+    <textarea
+      id="Prompt"
+      rows="6"
+      formControlName="dadosAdicionais"
+      class="form-control"
+      placeholder="Dados Adicionais (opcional)"
+    ></textarea>
+
+    <!-- Botão -->
+    <div class="form-actions">
+      <button
+        type="button"
+        class="submit-button"
+        [disabled]="!form.valid"
+        (click)="enviarAnalise()">
+        Enviar para análise
+      </button>
+    </div>
+  </form>
+</div>

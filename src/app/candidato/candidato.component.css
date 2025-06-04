@@ -1,0 +1,102 @@
+/* Container do formulário */
+.form-container {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 32px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.form-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 24px;
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+/* Grupos de campo */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Labels gerais */
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #444;
+}
+
+/* Campos de texto e select */
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fafafa;
+  transition: border-color 0.3s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #6A5ACD;
+  background-color: #fff;
+}
+
+/* Botões de upload */
+.file-upload-button {
+  width: 100%;
+  padding: 10px 14px;
+  background-color: #f9f9f9;
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.file-upload-button:hover {
+  background-color: #f1f1f1;
+  border-color: #6A5ACD;
+}
+
+/* Feedback de arquivo carregado */
+.file-upload-success {
+  margin-top: 8px;
+  color: #28a745;
+  font-size: 0.9rem;
+}
+
+/* Ações */
+.form-actions {
+  margin-top: 24px;
+}
+
+/* Botão de envio */
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #6A5ACD;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover:not([disabled]) {
+  background-color: #5948c9;
+}
+
+.submit-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

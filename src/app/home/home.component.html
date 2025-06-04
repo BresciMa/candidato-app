@@ -1,10 +1,10 @@
 <div class="container">
 
   <nav aria-label="Menu principal">
+    <a routerLink="candidato" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Candidato</a>
     <a routerLink="dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Envio de Análise</a>
-    <a routerLink="perfil-vaga" routerLinkActive="active">Perfil de Vaga</a>
     <a routerLink="modelo-validacao" routerLinkActive="active">Modelo de Validação</a>
-
+    <a routerLink="perfil-vaga" routerLinkActive="active">Perfil de Vaga</a>
     <!-- Botão de Logout -->
     <button (click)="logout()" aria-label="Logout">
       🔓 Logout
